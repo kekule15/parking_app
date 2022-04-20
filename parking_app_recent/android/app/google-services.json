@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "313743954642",
+    "project_id": "parkingapp-de7a9",
+    "storage_bucket": "parkingapp-de7a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313743954642:android:23fff9c9d65a448440930b",
+        "android_client_info": {
+          "package_name": "com.lorglow.parking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313743954642-d7kl9faene1555gv2mmafc5n4j3rc3fc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFHkLY7-evAglUMET7lgVHVaKV6i-CwEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313743954642-d7kl9faene1555gv2mmafc5n4j3rc3fc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
