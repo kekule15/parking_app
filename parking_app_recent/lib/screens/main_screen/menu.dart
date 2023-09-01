@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:parking_app/model/users.dart';
 import 'package:parking_app/screens/authentication/authentication_main.dart';
 import 'package:parking_app/screens/menu/subscription.dart';
@@ -15,7 +15,7 @@ import 'package:parking_app/screens/payment_stripe.dart';
 import '../menu/privacy_policy.dart';
 
 class Menu extends StatefulWidget {
-  const Menu({Key key}) : super(key: key);
+  const Menu({Key? key}) : super(key: key);
 
   @override
   _MenuState createState() => _MenuState();
@@ -23,7 +23,7 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   bool loading = false;
-  UserModel userModel;
+  UserModel? userModel;
   FirebaseFunctions firebaseFunctions = FirebaseFunctions();
 
   final List<String> menuTitleArray = [
@@ -98,11 +98,11 @@ class _MenuState extends State<Menu> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   _userInfoCard(BuildContext context, UserModel userModel) {
-    User user = _auth.currentUser;
+    User? user = _auth.currentUser;
     return Container(
       margin: EdgeInsets.fromLTRB(20, 60, 20, 0),
-      height: Functions.getScreenDimension(context, Constants.height) * .15,
-      width: Functions.getScreenDimension(context, Constants.width),
+      height: 70.h,
+      width: MediaQuery.sizeOf(context).width,
       child: Card(
         elevation: 5,
         color: Colors.white,
@@ -111,7 +111,7 @@ class _MenuState extends State<Menu> {
             child: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
               future: FirebaseFirestore.instance
                   .collection('users')
-                  .doc(user.uid)
+                  .doc(user!.uid)
                   .get(),
               builder: (context,
                   AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
@@ -123,17 +123,17 @@ class _MenuState extends State<Menu> {
                       radius: 40,
                       backgroundColor: Colors.blue,
                       backgroundImage:
-                          NetworkImage(snapshot.data.data()['image']),
+                          NetworkImage(snapshot.data?.data()!['image']),
                     ),
                     title: Text(
-                      snapshot.data.data()['name'],
+                      snapshot.data?.data()!['name'],
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                           color: Colors.blueAccent),
                     ),
                     subtitle: Text(
-                      snapshot.data.data()['email'],
+                      snapshot.data?.data()!['email'],
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
@@ -169,7 +169,7 @@ class _MenuState extends State<Menu> {
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         child: Column(
           children: [
-            _userInfoCard(context, userModel),
+            _userInfoCard(context, userModel!),
             Expanded(child: _menuCard()),
             loading
                 ? Container(
@@ -185,7 +185,7 @@ class _MenuState extends State<Menu> {
 }
 
 class AboutUs extends StatefulWidget {
-  const AboutUs({Key key}) : super(key: key);
+  const AboutUs({Key? key}) : super(key: key);
 
   @override
   _AboutUsState createState() => _AboutUsState();
@@ -245,12 +245,9 @@ class _AboutUsState extends State<AboutUs> {
                 ),
                 Container(
                   margin: EdgeInsets.only(
-                      top: Functions.getScreenDimension(
-                              context, Constants.height) *
-                          .005),
+                      top: 30.h),
                   height:
-                      Functions.getScreenDimension(context, Constants.height) *
-                          .4,
+                      40.h,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/icons/slider3.png"),

@@ -44,7 +44,7 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
     });
   }
 
-  String onboard;
+  String? onboard;
 
   @override
   Widget build(BuildContext context) => topSliderLayout();

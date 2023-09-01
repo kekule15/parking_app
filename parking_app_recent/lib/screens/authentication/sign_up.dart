@@ -5,12 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/db_helper.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:parking_app/model/users.dart';
 import 'package:parking_app/screens/authentication/model.dart';
 import 'package:parking_app/screens/main_screen/main_screen.dart';
@@ -30,34 +30,34 @@ class _SignUpState extends State<SignUp> {
   FirebaseFunctions firebaseFunctions = new FirebaseFunctions();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final picker = ImagePicker();
-  final dbHelper = DatabaseHelper.instance;
+  // final dbHelper = DatabaseHelper.instance;
   bool loading = false, enableTextFields = true;
-  PickedFile imageFile;
+  //PickedFile imageFile;
   final _formKey = GlobalKey<FormState>();
 
-  void _openGallery(BuildContext context) async {
-    final pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-    );
-    setState(() {
-      imageFile = pickedFile;
-    });
-    final User user = _auth.currentUser;
-    final _uid = user.uid;
-    final ref = FirebaseStorage.instance
-        .ref()
-        .child('Images')
-        .child('image-${Timestamp.now().millisecondsSinceEpoch.toString()}')
-        .child('$_uid');
-    await ref.putFile(File(imageFile.path.toString()));
-    imageUrl = await ref.getDownloadURL();
+  // void _openGallery(BuildContext context) async {
+  //   final pickedFile = await ImagePicker().getImage(
+  //     source: ImageSource.gallery,
+  //   );
+  //   setState(() {
+  //     imageFile = pickedFile;
+  //   });
+  //   final User user = _auth.currentUser;
+  //   final _uid = user.uid;
+  //   final ref = FirebaseStorage.instance
+  //       .ref()
+  //       .child('Images')
+  //       .child('image-${Timestamp.now().millisecondsSinceEpoch.toString()}')
+  //       .child('$_uid');
+  //   await ref.putFile(File(imageFile.path.toString()));
+  //   imageUrl = await ref.getDownloadURL();
 
-    var documentReference = FirebaseFirestore.instance
-        .collection('usersImage')
-        .doc(_uid)
-        .collection('userimageFile')
-        .doc(DateTime.now().millisecondsSinceEpoch.toString());
-  }
+  //   var documentReference = FirebaseFirestore.instance
+  //       .collection('usersImage')
+  //       .doc(_uid)
+  //       .collection('userimageFile')
+  //       .doc(DateTime.now().millisecondsSinceEpoch.toString());
+  // }
 
   _signUpFormLayout() {
     return Container(
@@ -70,9 +70,9 @@ class _SignUpState extends State<SignUp> {
               controller: nameController,
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) {
-                  return 'Field is required';
-                }
+                // if (value.isEmpty) {
+                //   return 'Field is required';
+                // }
               },
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
@@ -90,18 +90,18 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .02,
+                  20.h
             ),
             TextFormField(
-               inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp('[ ]')),
-                ],
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(RegExp('[ ]')),
+              ],
               controller: phoneNumberController,
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) {
-                  return 'Field is required';
-                }
+                // if (value.isEmpty) {
+                //   return 'Field is required';
+                // }
               },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
@@ -119,19 +119,19 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .02,
+                  20.h
             ),
             TextFormField(
-               inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp('[ ]')),
-                ],
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(RegExp('[ ]')),
+              ],
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) {
-                  return 'Field is required';
-                }
+                // if (value.isEmpty) {
+                //   return 'Field is required';
+                // }
               },
               decoration: InputDecoration(
                   prefixIcon: Icon(
@@ -148,18 +148,18 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .02,
+                  20.h
             ),
             TextFormField(
-               inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp('[ ]')),
-                ],
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(RegExp('[ ]')),
+              ],
               controller: passwordController,
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) {
-                  return 'Field is required';
-                }
+                // if (value.isEmpty) {
+                //   return 'Field is required';
+                // }
               },
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
@@ -177,15 +177,14 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .07,
+                  20.h
             ),
             InkWell(
               onTap: () async {
                 signUp(emailController.text, passwordController.text);
               },
               child: Container(
-                width: Functions.getScreenDimension(context, Constants.width) *
-                    0.6,
+              
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -237,8 +236,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             SizedBox(
-              height: Functions.getScreenDimension(context, Constants.height) *
-                  .012,
+              height: 20.h,
             ),
             Container(
               child: Text(
@@ -254,18 +252,18 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .03,
+                  20.h
             ),
             InkWell(
               onTap: () {
-                _openGallery(context);
+                //  _openGallery(context);
               },
               child: CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.blue,
-                backgroundImage: imageFile == null
-                    ? AssetImage('assets/images/faq_background.png')
-                    : FileImage(File(imageFile.path)),
+                // backgroundImage: imageFile == null
+                //     ? AssetImage('assets/images/faq_background.png')
+                //     : FileImage(File(imageFile.path)),
               ),
             ),
             SizedBox(
@@ -305,13 +303,13 @@ class _SignUpState extends State<SignUp> {
     )));
   }
 
-  String imageUrl;
-  
+  //String imageUrl;
+
   void signUp(String email, String password) async {
     setState(() {
       loading = true;
     });
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState!.validate()) {
       try {
         await _auth
             .createUserWithEmailAndPassword(email: email, password: password)
@@ -362,13 +360,13 @@ class _SignUpState extends State<SignUp> {
     // sedning these values
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User user = _auth.currentUser;
+    User? user = _auth.currentUser;
 
     UserModeltwo userModel = UserModeltwo(
-      uid: user.uid,
+      uid: user!.uid,
       email: user.email,
       name: nameController.text,
-      image: imageUrl,
+      image: '',
     );
 
     await firebaseFirestore

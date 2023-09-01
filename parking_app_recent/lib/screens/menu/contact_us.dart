@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatelessWidget {
@@ -73,7 +73,7 @@ class ContactUs extends StatelessWidget {
           ),
           SizedBox(
             height:
-                Functions.getScreenDimension(context, Constants.height) * .05,
+                20.h
           ),
           InkWell(
             onTap: () async {
@@ -84,8 +84,7 @@ class ContactUs extends StatelessWidget {
               }
             },
             child: Container(
-              width:
-                  Functions.getScreenDimension(context, Constants.width) * 0.6,
+            
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -138,8 +137,7 @@ class ContactUs extends StatelessWidget {
               _appBar(context),
               SizedBox(
                 height:
-                    Functions.getScreenDimension(context, Constants.height) *
-                        .02,
+                   20.h
               ),
               Container(
                 child: Text(
@@ -153,8 +151,7 @@ class ContactUs extends StatelessWidget {
               ),
               SizedBox(
                 height:
-                    Functions.getScreenDimension(context, Constants.height) *
-                        .032,
+                   30.h
               ),
               Center(
                 child: _contactFormLayout(context),

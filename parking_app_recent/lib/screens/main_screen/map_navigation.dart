@@ -10,15 +10,15 @@ import 'package:parking_app/services/get_directions.dart';
 import '../../model/get_directions_response.dart';
 
 class MapNavigation extends StatefulWidget {
-  final double startLat;
-  final double startLng;
-  final double destinationLat;
-  final double destinationLng;
-  final String distance;
-  final String vicinity;
+  final double? startLat;
+  final double? startLng;
+  final double? destinationLat;
+  final double? destinationLng;
+  final String? distance;
+  final String? vicinity;
 
   const MapNavigation(
-      {Key key,
+      {Key? key,
       this.startLat,
       this.startLng,
       this.destinationLat,
@@ -32,26 +32,26 @@ class MapNavigation extends StatefulWidget {
 }
 
 class _MapNavigationState extends State<MapNavigation> {
-  CameraPosition _initialLocation;
+  CameraPosition? _initialLocation;
 
-  GoogleMapController mapController;
-  Position _currentPosition;
+  GoogleMapController? mapController;
+  Position? _currentPosition;
   String _startAddress = '';
   String _destinationAddress = '';
   Set<Marker> markers = {};
   // Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
-  PolylinePoints polylinePoints;
-  Marker _startMarker, _destinationMarker;
-  Directions routeData;
+  PolylinePoints? polylinePoints;
+  Marker? _startMarker, _destinationMarker;
+  Directions? routeData;
 
   // final startAddressFocusNode = FocusNode();
   // final destinationAddressFocusNode = FocusNode();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Custom marker icon
-  BitmapDescriptor icon;
-  Timer timer;
+  BitmapDescriptor? icon;
+  Timer? timer;
 
   void initState() {
     BitmapDescriptor.fromAssetImage(
@@ -63,7 +63,7 @@ class _MapNavigationState extends State<MapNavigation> {
   }
 
   void dispose() {
-    timer.cancel();
+    timer!.cancel();
     super.dispose();
   }
 
@@ -98,10 +98,10 @@ class _MapNavigationState extends State<MapNavigation> {
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {
-          mapController.animateCamera(
+          mapController?.animateCamera(
             CameraUpdate.newCameraPosition(CameraPosition(
-              target: LatLng(widget.startLat,
-                  widget.startLng), //[merchantLatLong, userLatLong]
+              target: LatLng(widget.startLat!,
+                  widget.startLng!), //[merchantLatLong, userLatLong]
               zoom: 18,
             )),
           );
@@ -188,14 +188,14 @@ class _MapNavigationState extends State<MapNavigation> {
         bearing: 192.8334901395799,
         tilt: 59.440717697143555,
         zoom: 19.151926040649414,
-        target: LatLng(widget.startLat, widget.startLng));
+        target: LatLng(widget.startLat!, widget.startLng!));
 
     return GoogleMap(
       markers: {
-        if (_startMarker != null) _startMarker,
-        if (_destinationMarker != null) _destinationMarker,
+        if (_startMarker != null) _startMarker!,
+        if (_destinationMarker != null) _destinationMarker!,
       },
-      initialCameraPosition: _initialLocation,
+      initialCameraPosition: _initialLocation!,
       myLocationEnabled: true,
       myLocationButtonEnabled: true,
       mapType: MapType.normal,
@@ -207,7 +207,7 @@ class _MapNavigationState extends State<MapNavigation> {
             polylineId: const PolylineId('overview_polyline'),
             color: Colors.red,
             width: 5,
-            points: routeData.polylinePoints
+            points: routeData!.polylinePoints
                 .map((e) => LatLng(e.latitude, e.longitude))
                 .toList(),
           ),
@@ -225,7 +225,7 @@ class _MapNavigationState extends State<MapNavigation> {
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) async {
       final result = await DirectionService().getDirections(position.latitude,
-          position.longitude, widget.destinationLat, widget.destinationLng);
+          position.longitude, widget.destinationLat!, widget.destinationLng!);
       if (result != null) {
         setState(() {
           routeData = result;
@@ -234,9 +234,9 @@ class _MapNavigationState extends State<MapNavigation> {
       // print("my route data ${routeData.bounds}");
       setState(() {
         _currentPosition = position;
-        mapController.animateCamera(
+        mapController?.animateCamera(
           routeData != null
-              ? CameraUpdate.newLatLngBounds(routeData.bounds, 100.0)
+              ? CameraUpdate.newLatLngBounds(routeData!.bounds, 100.0)
               : CameraUpdate.newCameraPosition(
                   CameraPosition(
                     target: LatLng(position.latitude, position.longitude),
@@ -250,13 +250,13 @@ class _MapNavigationState extends State<MapNavigation> {
             infoWindow: InfoWindow(
               title: 'Start',
             ),
-            icon: icon,
+            icon: icon!,
             position:
-                LatLng(_currentPosition.latitude, _currentPosition.longitude));
+                LatLng(_currentPosition!.latitude, _currentPosition!.longitude));
 
         _destinationMarker = Marker(
           markerId: MarkerId('Destination'),
-          position: LatLng(widget.destinationLat, widget.destinationLng),
+          position: LatLng(widget.destinationLat!, widget.destinationLng!),
           infoWindow: InfoWindow(
             title: '${widget.vicinity}',
           ),

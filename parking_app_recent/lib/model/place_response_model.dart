@@ -15,9 +15,9 @@ class ParkingSpaceData {
         this.status,
     });
 
-    final List<dynamic> htmlAttributions;
-    final List<Result> results;
-    final String status;
+    final List<dynamic>? htmlAttributions;
+    final List<Result>? results;
+    final String? status;
 
     factory ParkingSpaceData.fromJson(Map<String, dynamic> json) => ParkingSpaceData(
         htmlAttributions: List<dynamic>.from(json["html_attributions"].map((x) => x)),
@@ -26,8 +26,8 @@ class ParkingSpaceData {
     );
 
     Map<String, dynamic> toJson() => {
-        "html_attributions": List<dynamic>.from(htmlAttributions.map((x) => x)),
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "html_attributions": List<dynamic>.from(htmlAttributions!.map((x) => x)),
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
         "status": status,
     };
 }
@@ -49,19 +49,19 @@ class Result {
         this.vicinity,
     });
 
-    final String businessStatus;
-    final Geometry geometry;
-    final String icon;
-    final String iconBackgroundColor;
-    final String iconMaskBaseUri;
-    final String name;
-    final OpeningHours openingHours;
-    final String placeId;
-    final PlusCode plusCode;
-    final String reference;
-    final String scope;
-    final List<String> types;
-    final String vicinity;
+    final String? businessStatus;
+    final Geometry? geometry;
+    final String? icon;
+    final String? iconBackgroundColor;
+    final String? iconMaskBaseUri;
+    final String? name;
+    final OpeningHours? openingHours;
+    final String? placeId;
+    final PlusCode? plusCode;
+    final String? reference;
+    final String? scope;
+    final List<String>? types;
+    final String? vicinity;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         businessStatus: json["business_status"],
@@ -81,17 +81,17 @@ class Result {
 
     Map<String, dynamic> toJson() => {
         "business_status": businessStatus,
-        "geometry": geometry.toJson(),
+        "geometry": geometry!.toJson(),
         "icon": icon,
         "icon_background_color": iconBackgroundColor,
         "icon_mask_base_uri": iconMaskBaseUri,
         "name": name,
-        "opening_hours": openingHours.toJson(),
+        "opening_hours": openingHours!.toJson(),
         "place_id": placeId,
-        "plus_code": plusCode.toJson(),
+        "plus_code": plusCode!.toJson(),
         "reference": reference,
         "scope": scope,
-        "types": List<dynamic>.from(types.map((x) => x)),
+        "types": List<dynamic>.from(types!.map((x) => x)),
         "vicinity": vicinity,
     };
 }
@@ -102,8 +102,8 @@ class Geometry {
         this.viewport,
     });
 
-    final Location location;
-    final Viewport viewport;
+    final Location? location;
+    final Viewport? viewport;
 
     factory Geometry.fromJson(Map<String, dynamic> json) => Geometry(
         location: Location.fromJson(json["location"]),
@@ -111,8 +111,8 @@ class Geometry {
     );
 
     Map<String, dynamic> toJson() => {
-        "location": location.toJson(),
-        "viewport": viewport.toJson(),
+        "location": location!.toJson(),
+        "viewport": viewport!.toJson(),
     };
 }
 
@@ -122,8 +122,8 @@ class Location {
         this.lng,
     });
 
-    final double lat;
-    final double lng;
+    final double? lat;
+    final double? lng;
 
     factory Location.fromJson(Map<String, dynamic> json) => Location(
         lat: json["lat"].toDouble(),
@@ -142,8 +142,8 @@ class Viewport {
         this.southwest,
     });
 
-    final Location northeast;
-    final Location southwest;
+    final Location? northeast;
+    final Location? southwest;
 
     factory Viewport.fromJson(Map<String, dynamic> json) => Viewport(
         northeast: Location.fromJson(json["northeast"]),
@@ -151,8 +151,8 @@ class Viewport {
     );
 
     Map<String, dynamic> toJson() => {
-        "northeast": northeast.toJson(),
-        "southwest": southwest.toJson(),
+        "northeast": northeast!.toJson(),
+        "southwest": southwest!.toJson(),
     };
 }
 
@@ -161,7 +161,7 @@ class OpeningHours {
         this.openNow,
     });
 
-    final bool openNow;
+    final bool? openNow;
 
     factory OpeningHours.fromJson(Map<String, dynamic> json) => OpeningHours(
         openNow: json["open_now"],
@@ -178,8 +178,8 @@ class PlusCode {
         this.globalCode,
     });
 
-    final String compoundCode;
-    final String globalCode;
+    final String? compoundCode;
+    final String? globalCode;
 
     factory PlusCode.fromJson(Map<String, dynamic> json) => PlusCode(
         compoundCode: json["compound_code"],

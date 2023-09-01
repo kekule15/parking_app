@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';;
 import 'package:parking_app/screens/main_screen/menu.dart';
 import 'home_screen.dart';
 

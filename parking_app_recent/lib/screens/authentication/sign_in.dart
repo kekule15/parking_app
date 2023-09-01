@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/db_helper.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:parking_app/model/users.dart';
 import 'package:parking_app/screens/authentication/social_signup_info.dart';
 import 'package:parking_app/screens/main_screen/main_screen.dart';
@@ -21,20 +20,20 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordController = TextEditingController();
   FirebaseFunctions firebaseFunctions = new FirebaseFunctions();
   final picker = ImagePicker();
-  final dbHelper = DatabaseHelper.instance;
+  //final dbHelper = DatabaseHelper.instance;
   bool loading = false, enableTextFields = true;
-  PickedFile imageFile;
+  //PickedFile imageFile;
   final _formKey = GlobalKey<FormState>();
 
-  void _openGallery(BuildContext context) async {
-    final pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-    );
-    setState(() {
-      imageFile = pickedFile;
-    });
-    Navigator.pop(context);
-  }
+  // void _openGallery(BuildContext context) async {
+  //   final pickedFile = await ImagePicker().getImage(
+  //     source: ImageSource.gallery,
+  //   );
+  //   setState(() {
+  //     imageFile = pickedFile;
+  //   });
+  //   Navigator.pop(context);
+  // }
 
   _loginFormLayout() {
     return Container(
@@ -48,9 +47,9 @@ class _SignInState extends State<SignIn> {
               keyboardType: TextInputType.emailAddress,
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) {
-                  return 'Field is required';
-                }
+                // if (value.isEmpty) {
+                //   return 'Field is required';
+                // }
               },
                inputFormatters: [
                   FilteringTextInputFormatter.deny(RegExp('[ ]')),
@@ -71,7 +70,7 @@ class _SignInState extends State<SignIn> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .02,
+                  20.h
             ),
             TextFormField(
               controller: passwordController,
@@ -82,9 +81,9 @@ class _SignInState extends State<SignIn> {
               keyboardType: TextInputType.visiblePassword,
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) {
-                  return 'Field is required';
-                }
+                // if (value.isEmpty) {
+                //   return 'Field is required';
+                // }
               },
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.security),
@@ -98,15 +97,14 @@ class _SignInState extends State<SignIn> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .05,
+                  30.h
             ),
             InkWell(
               onTap: () async {
                 signIn();
               },
               child: Container(
-                width: Functions.getScreenDimension(context, Constants.width) *
-                    0.6,
+               
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -150,10 +148,9 @@ class _SignInState extends State<SignIn> {
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(
-                  top: Functions.getScreenDimension(context, Constants.height) *
-                      .06),
+                  top: 50.h),
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .4,
+                  40.h,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/icons/login.png"),
@@ -161,7 +158,7 @@ class _SignInState extends State<SignIn> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .02,
+                  20.h
             ),
             Container(
               child: Text(
@@ -174,8 +171,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             SizedBox(
-              height: Functions.getScreenDimension(context, Constants.height) *
-                  .012,
+              height: 10.h
             ),
             Container(
               child: Text(
@@ -191,7 +187,7 @@ class _SignInState extends State<SignIn> {
             ),
             SizedBox(
               height:
-                  Functions.getScreenDimension(context, Constants.height) * .07,
+                 10.h
             ),
             _loginFormLayout()
             // _signUpButtonLayout(_screenHeight)
@@ -222,7 +218,7 @@ class _SignInState extends State<SignIn> {
       loading = true;
     });
     final form = _formKey.currentState;
-    if (!form.validate()) {
+    if (!form!.validate()) {
       setState(() {
         loading = false;
       });

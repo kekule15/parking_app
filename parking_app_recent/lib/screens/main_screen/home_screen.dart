@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:parking_app/model/PlaceModel.dart';
 import 'package:parking_app/model/map_route_data.dart';
 import 'package:parking_app/model/place.dart';
@@ -13,7 +13,6 @@ import 'map_navigation.dart';
 import 'package:parking_app/services/geolocator_service.dart';
 import 'package:parking_app/services/marker_service.dart';
 import 'package:parking_app/services/places_service.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -21,12 +20,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  GoogleMapController _controller;
-  Future<List<Place>> futurePlaces;
+  GoogleMapController? _controller;
+  Future<List<Place>>? futurePlaces;
   //List<Result> placesList = [];
-  double distance, currentLat = 0.0, currentLng = 0.0;
+  double? distance, currentLat = 0.0, currentLng = 0.0;
   List<Result> places = [];
-  Marker origin;
+  Marker? origin;
   int mapTypeController = 0;
 
   Future<Position> _determinePosition() async {
@@ -60,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
       currentPosition = position;
     });
     final result = await PlaceService()
-        .getPlaces(currentPosition.latitude, currentPosition.longitude);
+        .getPlaces(currentPosition!.latitude, currentPosition!.longitude);
     if (result != null) {
       setState(() {
         mydata = result;
@@ -68,8 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  ParkingSpaceData mydata;
-  Position currentPosition;
+  ParkingSpaceData? mydata;
+  Position? currentPosition;
 
   _getCameraPosition(double lat, double lng) {
     return CameraPosition(
@@ -80,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _moveCameraView(Position currentPosition) async {
-    final GoogleMapController controller = await _controller;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_getCameraPosition(
+    final GoogleMapController? controller = await _controller;
+    controller!.animateCamera(CameraUpdate.newCameraPosition(_getCameraPosition(
         currentPosition.latitude, currentPosition.longitude)));
   }
 
@@ -101,10 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   // tilt: 59.440717697143555,
                   zoom: 18.151926040649414,
                   target: LatLng(
-                      currentPosition.latitude, currentPosition.longitude),
+                      currentPosition!.latitude, currentPosition!.longitude),
                 ),
                 markers: {
-                  if (origin != null) origin,
+                  if (origin != null) origin!,
                 },
                 onTap: addMarker,
                 onMapCreated: (GoogleMapController controller) {
@@ -116,8 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           title: 'Origin',
                         ),
                         icon: BitmapDescriptor.defaultMarker,
-                        position: LatLng(currentPosition.latitude,
-                            currentPosition.longitude));
+                        position: LatLng(currentPosition!.latitude,
+                            currentPosition!.longitude));
                   });
                 }),
           )
@@ -168,14 +167,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CircularProgressIndicator(),
                       ),
                     )
-                  : mydata.results.isEmpty
+                  : mydata!.results!.isEmpty
                       ? Center(
                           child: Text('No parking space available now'),
                         )
                       : ListView.builder(
                           shrinkWrap: true,
                           controller: scrollController,
-                          itemCount: mydata.results.length, //places.length,
+                          itemCount: mydata!.results!.length, //places.length,
                           itemBuilder: (context, index) {
                             return FutureProvider(
                               create: (context) =>
@@ -200,21 +199,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         currentLocationLatitude,
                                                     startLng:
                                                         currentLocationLongitude,
-                                                    destinationLat: mydata
-                                                        .results[index]
-                                                        .geometry
-                                                        .location
+                                                    destinationLat: mydata!
+                                                        .results![index]
+                                                        .geometry!
+                                                        .location!
                                                         .lat,
-                                                    destinationLng: mydata
-                                                        .results[index]
-                                                        .geometry
-                                                        .location
+                                                    destinationLng: mydata!
+                                                        .results![index]
+                                                        .geometry!
+                                                        .location!
                                                         .lng,
-                                                    vicinity: mydata
-                                                        .results[index]
+                                                    vicinity: mydata!
+                                                        .results![index]
                                                         .vicinity,
                                                     distance:
-                                                        '${distance.round()}',
+                                                        '${distance!.round()}',
                                                   )));
                                     },
                                     leading: Icon(
@@ -226,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       margin:
                                           EdgeInsets.fromLTRB(0, 10, 10, 10),
                                       child: Text(
-                                        mydata.results[index].name,
+                                        mydata!.results![index].name.toString(),
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w700),
@@ -237,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          mydata.results[index].vicinity,
+                                          mydata!.results![index].vicinity.toString(),
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600),
@@ -287,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 

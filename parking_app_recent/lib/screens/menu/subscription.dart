@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:parking_app/style/appColors.dart';
 
 class Subscription extends StatefulWidget {
-  const Subscription({Key key}) : super(key: key);
+  const Subscription({Key? key}) : super(key: key);
   @override
   _SubscriptionState createState() => _SubscriptionState();
 }
@@ -9,7 +10,7 @@ class Subscription extends StatefulWidget {
 class _SubscriptionState extends State<Subscription> {
   _appBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.blue,
+      backgroundColor: AppColors.primary,
       elevation: 0,
       leading: GestureDetector(
         onTap: () => Navigator.pop(context),
@@ -24,11 +25,11 @@ class _SubscriptionState extends State<Subscription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor:  AppColors.primary,
       appBar: _appBar(context),
       body:Container(
         height: double.infinity,
-        color: Colors.blue,
+        color:  AppColors.primary,
         // decoration: BoxDecoration(
         //     image: DecorationImage(
         //         image: AssetImage('assets/images/faq_background.png')

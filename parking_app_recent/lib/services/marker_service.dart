@@ -3,7 +3,7 @@ import 'package:parking_app/model/PlaceModel.dart';
 
 class MarkerService {
   List<Marker> getMarkers(List<PlaceModel> places) {
-    var markers = [];
+    List<Marker> markers = [];
     places.forEach((place) {
       Marker marker = Marker(
           markerId: MarkerId(place.name),

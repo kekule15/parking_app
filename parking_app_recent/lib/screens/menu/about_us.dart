@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AboutUs extends StatefulWidget {
-  const AboutUs({Key key}) : super(key: key);
+  const AboutUs({Key? key}) : super(key: key);
 
   @override
   _AboutUsState createState() => _AboutUsState();
@@ -65,12 +65,9 @@ class _AboutUsState extends State<AboutUs> {
 
                 Container(
                   margin: EdgeInsets.only(
-                      top: Functions
-                          .getScreenDimension(context, Constants.height) *
-                          .005),
+                      top: 50.h),
                   height:
-                  Functions.getScreenDimension(context, Constants.height) *
-                      .4,
+                 16.h,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/icons/slider3.png"),

@@ -19,28 +19,25 @@ class PermissionService {
       Permission.contacts
     ].request();
 
-    if (statuses[Permission.location].isDenied) {
+    if (statuses[Permission.location]!.isDenied) {
       print('location permision denied');
     }
-    if (statuses[Permission.location].isDenied) {
-      print('location permision denied');
-    }
-    if (statuses[Permission.storage].isDenied) {
+    if (statuses[Permission.storage]!.isDenied) {
       print('storage permision denied');
     }
-    if (statuses[Permission.accessMediaLocation].isDenied) {
+    if (statuses[Permission.accessMediaLocation]!.isDenied) {
       print('accessMediaLocation permision denied');
     }
-    if (statuses[Permission.camera].isDenied) {
+    if (statuses[Permission.camera]!.isDenied) {
       print('camera permision denied');
     }
-    if (statuses[Permission.photos].isDenied) {
+    if (statuses[Permission.photos]!.isDenied) {
       print('photo permision denied');
     }
-    if (statuses[Permission.notification].isDenied) {
+    if (statuses[Permission.notification]!.isDenied) {
       print('notification permision denied');
     }
-    if (statuses[Permission.microphone].isDenied) {
+    if (statuses[Permission.microphone]!.isDenied) {
       print('microphone permision denied');
     }
 

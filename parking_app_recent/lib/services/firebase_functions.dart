@@ -16,14 +16,14 @@ class FirebaseFunctions {
   
  
 
-  Future<UserModel> signInUsingEmailAndPassword(
+  Future signInUsingEmailAndPassword(
       String email, String password) async {
     try {
       UserCredential userCredential = await firebaseAuthInstance
           .signInWithEmailAndPassword(email: email, password: password);
-      final User user = userCredential.user;
+      final User? user = userCredential.user;
       if (user == null) {
-        return null;
+        return UserModel("name", "email", "phoneNumber", "profilePictureUrl");
       }
       return UserModel(
           user.displayName, user.email, user.phoneNumber, user.photoURL);
@@ -32,7 +32,7 @@ class FirebaseFunctions {
     } catch (e) {
       print(e);
     }
-    return null;
+    
   }
 
   

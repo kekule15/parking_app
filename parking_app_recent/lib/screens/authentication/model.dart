@@ -1,8 +1,8 @@
 class UserModeltwo {
- final String uid;
- final String email;
- final String image;
- final String name;
+ final String? uid;
+ final String? email;
+ final String? image;
+ final String? name;
 
   UserModeltwo( {this.uid, this.email, this.name, this.image,});
 

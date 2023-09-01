@@ -1,7 +1,7 @@
-import 'package:flushbar/flushbar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:parking_app/model/users.dart';
 import 'package:parking_app/screens/main_screen/main_screen.dart';
 import 'package:parking_app/services/firebase_functions.dart';
@@ -93,8 +93,7 @@ class _SocialSignUpInfoState extends State<SocialSignUpInfo> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(
-                    height: Functions.getScreenDimension(context, Constants.height) *
-                        .06,
+                    height: 40.h
                   ),
                   Center(
                     child: CircleAvatar(
@@ -105,14 +104,13 @@ class _SocialSignUpInfoState extends State<SocialSignUpInfo> {
                     ),
                   ),
                   SizedBox(
-                    height: Functions.getScreenDimension(context, Constants.height) *
-                        .06,
+                    height: 20.h
                   ),
                   TextFormField(
                     validator: (value) {
-                      if(value.isEmpty){
-                        return "Please enter your name";
-                      }
+                      // if(value.isEmpty){
+                      //   return "Please enter your name";
+                      // }
                       return null;
                     },
                     decoration: InputDecoration(
@@ -129,14 +127,13 @@ class _SocialSignUpInfoState extends State<SocialSignUpInfo> {
                     ),
                   ),
                   SizedBox(
-                    height: Functions.getScreenDimension(context, Constants.height) *
-                        .02,
+                    height: 20.h
                   ),
                   TextFormField(
                     validator: (value) {
-                      if(value.isEmpty){
-                        return "Please enter your email";
-                      }
+                      // if(value.isEmpty){
+                      //   return "Please enter your email";
+                      // }
                       return null;
                     },
                     enabled: false,
@@ -155,14 +152,13 @@ class _SocialSignUpInfoState extends State<SocialSignUpInfo> {
                   ),
 
                   SizedBox(
-                    height: Functions.getScreenDimension(context, Constants.height) *
-                        .04,
+                    height: 20.h
                   ),
                   TextFormField(
                     validator: (value) {
-                      if(value.isEmpty){
-                        return "Please enter your phone number";
-                      }
+                      // if(value.isEmpty){
+                      //   return "Please enter your phone number";
+                      // }
                       return null;
                     },
                     controller: phoneNumberController,
@@ -179,14 +175,13 @@ class _SocialSignUpInfoState extends State<SocialSignUpInfo> {
                     ),
                   ),
                   SizedBox(
-                    height: Functions.getScreenDimension(context, Constants.height) *
-                        .02,
+                    height: 20.h
                   ),
                   TextFormField(
                     validator: (value) {
-                      if(value.isEmpty){
-                        return "Please enter your password";
-                      }
+                      // if(value.isEmpty){
+                      //   return "Please enter your password";
+                      // }
                       return null;
                     },
                     controller: passwordController,
@@ -204,8 +199,7 @@ class _SocialSignUpInfoState extends State<SocialSignUpInfo> {
                   ),
 
                   SizedBox(
-                    height: Functions.getScreenDimension(context, Constants.height) *
-                        .02,
+                    height: 20.h
                   ),
                   _nextButton(),
                 ],

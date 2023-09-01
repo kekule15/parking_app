@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:parking_app/constants.dart';
 
 class Slider {
@@ -7,9 +7,9 @@ class Slider {
   final String sliderSubHeading;
 
   Slider(
-      {@required this.sliderImageUrl,
-      @required this.sliderHeading,
-      @required this.sliderSubHeading});
+      {required this.sliderImageUrl,
+      required this.sliderHeading,
+      required this.sliderSubHeading});
 }
 
 final sliderArrayList = [

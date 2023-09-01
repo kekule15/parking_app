@@ -1,11 +1,11 @@
 import 'package:parking_app/model/geometry.dart';
 
 class Place {
-  final String name;
-  final double rating;
-  final int userRatingCount;
-  final String vicinity;
-  final Geometry geometry;
+  final String? name;
+  final double? rating;
+  final int? userRatingCount;
+  final String? vicinity;
+  final Geometry? geometry;
 
   Place(
       {this.geometry,

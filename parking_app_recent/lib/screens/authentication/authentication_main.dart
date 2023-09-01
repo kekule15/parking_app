@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/db_helper.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:parking_app/model/users.dart';
 import 'package:parking_app/screens/authentication/sign_in.dart';
 import 'package:parking_app/screens/authentication/sign_up.dart';
@@ -20,19 +19,18 @@ class AuthMain extends StatefulWidget {
 class _AuthMainState extends State<AuthMain> {
   FirebaseFunctions firebaseFunctions = new FirebaseFunctions();
   final picker = ImagePicker();
-  final dbHelper = DatabaseHelper.instance;
+  //final dbHelper = DatabaseHelper.instance;
   bool loading = false;
-  PickedFile imageFile;
+  final imagePicker = ImagePicker();
 
-  void _openGallery(BuildContext context) async {
-    final pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-    );
-    setState(() {
-      imageFile = pickedFile;
-    });
-    Navigator.pop(context);
-  }
+  // void _openGallery(BuildContext context) async {
+  //     XFile? pickedImage =
+  //         await imagePicker.pickImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     imageFile = pickedFile;
+  //   });
+  //   Navigator.pop(context);
+  // }
 
 
 
@@ -51,13 +49,11 @@ class _AuthMainState extends State<AuthMain> {
               Container(
                   margin: EdgeInsets.fromLTRB(
                       20,
-                      Functions.getScreenDimension(context, Constants.height) *
-                          0.2,
+                     20,
                       20,
                       20),
                   height:
-                      Functions.getScreenDimension(context, Constants.height) *
-                          0.4,
+                      20.h,
                   child: Image.asset("assets/icons/auth.png",
                       fit: BoxFit.contain)),
               Container(
@@ -80,16 +76,14 @@ class _AuthMainState extends State<AuthMain> {
               ),
               Center(
                 child: Container(
-                  width: Functions.getScreenDimension(context, Constants.width),
+                  width: 30.w,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         margin: EdgeInsets.only(top: 20.0, right: 20),
                         height: 40,
-                        width: Functions.getScreenDimension(
-                                context, Constants.width) *
-                            0.35,
+                        width: 20.h,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.blue,
@@ -112,9 +106,7 @@ class _AuthMainState extends State<AuthMain> {
                       ),
                       Container(
                         height: 40,
-                        width: Functions.getScreenDimension(
-                                context, Constants.width) *
-                            0.35,
+                        width: 15.h,
                         margin: EdgeInsets.only(top: 20.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),

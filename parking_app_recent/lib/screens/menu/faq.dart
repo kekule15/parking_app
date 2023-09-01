@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants.dart';
 class Faq extends StatelessWidget {
@@ -36,12 +36,9 @@ class Faq extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.only(
-                    top: Functions
-                        .getScreenDimension(context, Constants.height) *
-                        .005),
+                    top: 20),
                 height:
-                Functions.getScreenDimension(context, Constants.height) *
-                    .4,
+                40.w,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/icons/faq.png"),

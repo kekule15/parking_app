@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:parking_app/constants.dart';
-import 'package:parking_app/helper/funtions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:parking_app/screens/onboarding/model/slider.dart';
 
 
@@ -15,8 +15,8 @@ class SlideItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-          height: Functions.getScreenDimension(context, Constants.height) * 0.6,
-          width: Functions.getScreenDimension(context, Constants.width) ,
+          height: 20.h,
+          width: MediaQuery.sizeOf(context).width,
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(sliderArrayList[index].sliderImageUrl))),
